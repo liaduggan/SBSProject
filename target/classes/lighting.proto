@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "grpc.sbs";
+option java_outer_classname = "SBSLighServiceImpl";
+
+package lighting;
+
+// interface exported by the server
+service LightingService{
+  // Sends light switch on/off requests
+  rpc lightSwitch (stream FloorsRequest) returns (CompletedActionsResponse) {}
+
+}
+
+// The request message streams user inputs of the floors the lights should be switched on/off
+message FloorsRequest {
+  int32 floorNo = 1;
+}
+
+// The unary response message that the action was completed
+message CompletedActionsResponse {
+  string message = 1;
+}

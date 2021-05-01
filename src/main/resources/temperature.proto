@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "grpc.sbs";
+option java_outer_classname = "SBSTempServiceImpl";
+
+package temperature;
+
+// interface exported by the server
+service TempService{
+  // Sends temperature reading request
+  rpc tempReading (tempRequest) returns (stream currentTemperature) {}
+
+  // Sends change temperature setting request
+  rpc tempSet (stream tempSetRequest) returns (stream tempSetResponse) {}
+
+}
+
+// The request message containing the request
+message tempRequest {
+  string message = 1;
+}
+
+// The response message containing the current temperature
+message currentTemperature {
+  int32 temp = 1;
+}
+
+// The request message containing the requested temperature setting
+message tempSetRequest {
+  int32 temp = 1;
+}
+
+
+// The response message containing the confirmation that the settings have changed
+message tempSetResponse {
+  string message = 1;
+}

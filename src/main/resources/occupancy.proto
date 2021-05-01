@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "grpc.sbs";
+option java_outer_classname = "SBSOccupServiceImpl";
+
+package occupancy;
+
+// interface exported by the server
+service CounterService{
+  // Sends occupancy request
+  rpc occupancy (OccupancyRequest) returns (OccupancyResponse) {}
+
+}
+
+// The request message containing the request (and current time?)
+message OccupancyRequest {
+	//if time allows plan to change to time of request instead of name
+  string name = 1;
+}
+
+// The response message containing the occupancy count
+message OccupancyResponse {
+  string message = 1;
+}
